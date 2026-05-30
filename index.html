@@ -14,427 +14,398 @@
 
 <body class="theme-dark">
 
-<div class="app memo-docked" id="appRoot">
-  <aside class="sidepanel desktop-sidepanel" aria-label="Desktop controls">
-    <div class="brand-block">
-      <div class="kicker">
-        <i class="fa-solid fa-clapperboard"></i>filming in croatia - 2026
-      </div>
-      <h1 class="brand-title">Financing<br>calculator</h1>
-      <button type="button" class="brand-truth-link" data-truth-trigger
-        aria-controls="truthPanel" aria-expanded="false">
-        <i class="fa-solid fa-circle-info"></i>
-        <span>truth &amp; sources</span>
-      </button>
+<div class="app" id="appRoot">
+
+  <header class="af-header" aria-label="Aning Film header">
+    <a class="af-brand" href="https://aningfilm.hr" target="_blank" rel="noopener">
+      <span class="af-logo-wrap" aria-hidden="true">
+        <img class="af-logo af-logo--darkbg" src="brand/af-logo-light.png" alt="">
+        <img class="af-logo af-logo--lightbg" src="brand/af-logo-dark.png" alt="">
+      </span>
+      <span class="af-brand-text">Aning Film</span>
+    </a>
+    <nav class="af-links" aria-label="Aning Film links">
+      <a class="af-link" href="https://aningfilm.hr" target="_blank" rel="noopener">aningfilm.hr</a>
+      <a class="af-link" href="https://filmincroatia.com" target="_blank" rel="noopener">filmincroatia.com</a>
+      <a class="af-link" href="https://dogma23.org" target="_blank" rel="noopener">dogma23.org</a>
+    </nav>
+  </header>
+
+  <!-- ─── THE STAGE — one full-bleed cosmos everything else lives inside ─── -->
+  <main class="stage" aria-label="Funding constellation">
+    <div class="const-kicker">
+      <i class="fa-solid fa-circle-nodes"></i>the constellation - sources of money
     </div>
+    <svg class="const-svg" id="constSvg" aria-hidden="true"></svg>
+    <div class="const-hud" id="constHud"></div>
+  </main>
 
-    <section class="ctrl-section">
-      <div class="kicker">project - 01</div>
-      <div class="project-chips">
-        <button type="button" class="p-chip active" data-project="feature">
-          <i class="fa-solid fa-film"></i>
-          <span>Feature</span>
-        </button>
-        <button type="button" class="p-chip" data-project="short">
-          <i class="fa-solid fa-clapperboard"></i>
-          <span>Short</span>
-        </button>
-        <button type="button" class="p-chip" data-project="featureDocumentary">
-          <i class="fa-solid fa-tv"></i>
-          <span>Documentary</span>
-        </button>
+  <!-- ─── THE CONSOLE — one adaptive floating instrument cluster ─────────── -->
+  <aside class="console" id="console" aria-label="Controls">
+    <button type="button" class="console-toggle" id="consoleToggle"
+      aria-expanded="true" aria-controls="consoleBody">
+      <span class="console-toggle-grip"><i class="fa-solid fa-sliders"></i></span>
+      <span class="console-toggle-read" id="consoleToggleRead">controls</span>
+      <i class="fa-solid fa-chevron-down console-toggle-chev"></i>
+    </button>
+
+    <div class="console-body" id="consoleBody">
+      <div class="brand-block">
+        <div class="kicker">
+          <i class="fa-solid fa-clapperboard"></i>filming in croatia - 2026
+        </div>
+        <h1 class="brand-title">Financing<br>calculator</h1>
       </div>
-    </section>
 
-    <section class="ctrl-section">
-      <div class="kicker">mode - 02</div>
-      <div class="mode-row">
-        <button type="button" class="mode-btn" data-mode="service">
-          <i class="fa-solid fa-briefcase"></i>
-          <span>Service</span>
+      <!-- Cycling instruments: click anywhere to advance to the next state -->
+      <div class="console-instruments" role="group" aria-label="Project setup">
+        <button type="button" class="cyc" data-cycle="projectType">
+          <span class="cyc-kicker">project</span>
+          <span class="cyc-state">
+            <i class="cyc-icon fa-solid fa-film"></i>
+            <span class="cyc-value">Feature</span>
+          </span>
+          <span class="cyc-ghost" aria-hidden="true"></span>
+          <span class="cyc-meta">
+            <span class="cyc-dots" aria-hidden="true"></span>
+            <i class="cyc-cycle fa-solid fa-rotate" aria-hidden="true"></i>
+          </span>
         </button>
-        <button type="button" class="mode-btn active" data-mode="minority">
-          <i class="fa-solid fa-handshake"></i>
-          <span>Minority</span>
+
+        <button type="button" class="cyc" data-cycle="mode">
+          <span class="cyc-kicker">mode</span>
+          <span class="cyc-state">
+            <i class="cyc-icon fa-solid fa-handshake"></i>
+            <span class="cyc-value">Minority</span>
+          </span>
+          <span class="cyc-ghost" aria-hidden="true"></span>
+          <span class="cyc-meta">
+            <span class="cyc-dots" aria-hidden="true"></span>
+            <i class="cyc-cycle fa-solid fa-rotate" aria-hidden="true"></i>
+          </span>
         </button>
-      </div>
-    </section>
 
-    <section class="slider-block">
-      <div class="slider-head">
-        <span class="kicker"><i class="fa-solid fa-euro-sign"></i>total budget - 03</span>
-      </div>
-      <div class="slider-val" data-display="valBudget">EUR 1,200,000</div>
-      <input type="range" data-field="totalBudget"
-        min="80000" max="6000000" step="10000" value="1200000"
-        aria-label="Total budget">
-    </section>
-
-    <section class="slider-block">
-      <div class="slider-head">
-        <span class="kicker"><i class="fa-solid fa-lock"></i>secured - 04</span>
-        <span class="slider-sub" data-display="subSecured">EUR 744,000</span>
-      </div>
-      <div class="slider-val" data-display="valSecured">62%</div>
-      <input type="range" data-field="securedPct"
-        min="0.05" max="1" step="0.01" value="0.62"
-        aria-label="Secured financing percent">
-    </section>
-
-    <section class="slider-block">
-      <div class="slider-head">
-        <span class="kicker"><i class="fa-solid fa-location-dot"></i>croatia spend - 05</span>
-        <span class="slider-sub" data-display="subCroatia">EUR 780,000</span>
-      </div>
-      <div class="slider-val" data-display="valCroatia">65%</div>
-      <input type="range" data-field="croatiaPct"
-        min="0" max="1" step="0.01" value="0.65"
-        aria-label="Croatia spend percent">
-    </section>
-
-    <section class="ctrl-section">
-      <div class="kicker">region - 06</div>
-      <div class="mode-row">
-        <button type="button" class="mode-btn region-btn active" data-region="standard">
-          <i class="fa-solid fa-map"></i>
-          <span>Standard</span>
+        <button type="button" class="cyc" data-cycle="region">
+          <span class="cyc-kicker">region</span>
+          <span class="cyc-state">
+            <i class="cyc-icon fa-solid fa-map"></i>
+            <span class="cyc-value">Standard</span>
+          </span>
+          <span class="cyc-ghost" aria-hidden="true"></span>
+          <span class="cyc-meta">
+            <span class="cyc-dots" aria-hidden="true"></span>
+            <i class="cyc-cycle fa-solid fa-rotate" aria-hidden="true"></i>
+          </span>
         </button>
-        <button type="button" class="mode-btn region-btn" data-region="lowdev">
-          <i class="fa-solid fa-mountain-sun"></i>
-          <span>Low-dev</span>
+
+        <button type="button" class="cyc cyc--theme" data-cycle="theme">
+          <span class="cyc-kicker">theme</span>
+          <span class="cyc-state">
+            <i class="cyc-icon fa-solid fa-circle-half-stroke"></i>
+            <span class="cyc-value">Auto</span>
+          </span>
+          <span class="cyc-ghost" aria-hidden="true"></span>
+          <span class="cyc-meta">
+            <span class="cyc-dots" aria-hidden="true"></span>
+            <i class="cyc-cycle fa-solid fa-rotate" aria-hidden="true"></i>
+          </span>
         </button>
       </div>
-    </section>
 
-    <div class="coverage-card">
-      <div class="kicker">coverage</div>
-      <div class="coverage-pct" data-display="coveragePct">0%</div>
-      <div class="coverage-note" data-display="coverageNote">fully covered</div>
-      <div class="coverage-potential" data-display="coveragePotential">potential EUR 0</div>
-    </div>
+      <!-- Numeric instruments: sliders with inline-editable readouts -->
+      <div class="console-sliders">
+        <div class="cslider">
+          <div class="cslider-head">
+            <span class="kicker"><i class="fa-solid fa-euro-sign"></i>total budget</span>
+            <span class="inline-input-wrap">
+              <span class="inline-prefix">€</span>
+              <input type="text" inputmode="numeric" class="inline-input" id="memoBudget"
+                aria-label="Total budget in euro">
+            </span>
+          </div>
+          <input type="range" data-field="totalBudget"
+            min="80000" max="6000000" step="10000" value="1200000"
+            aria-label="Total budget">
+        </div>
 
-    <div class="theme-toggle" role="radiogroup" aria-label="Theme">
-      <span class="kicker theme-toggle-label">theme</span>
-      <div class="theme-toggle-row">
-        <button type="button" data-theme="auto"  aria-pressed="true">auto</button>
-        <button type="button" data-theme="light" aria-pressed="false">light</button>
-        <button type="button" data-theme="dark"  aria-pressed="false">dark</button>
+        <div class="cslider">
+          <div class="cslider-head">
+            <span class="kicker"><i class="fa-solid fa-lock"></i>secured</span>
+            <span class="inline-input-wrap">
+              <input type="text" inputmode="numeric" class="inline-input" id="memoSecured"
+                aria-label="Secured percent">
+              <span class="inline-suffix">%</span>
+            </span>
+          </div>
+          <input type="range" data-field="securedPct"
+            min="0.05" max="1" step="0.01" value="0.62"
+            aria-label="Secured financing percent">
+          <span class="cslider-sub" data-display="subSecured">EUR 744,000</span>
+        </div>
+
+        <div class="cslider">
+          <div class="cslider-head">
+            <span class="kicker"><i class="fa-solid fa-location-dot"></i>croatia spend</span>
+            <span class="inline-input-wrap">
+              <input type="text" inputmode="numeric" class="inline-input" id="memoCroatia"
+                aria-label="Croatia spend percent">
+              <span class="inline-suffix">%</span>
+            </span>
+          </div>
+          <input type="range" data-field="croatiaPct"
+            min="0" max="1" step="0.01" value="0.65"
+            aria-label="Croatia spend percent">
+          <span class="cslider-sub" data-display="subCroatia">EUR 780,000</span>
+        </div>
       </div>
-    </div>
 
-    <div class="signoff">
-      Aning Film - always paranoid,<br>never panicked.
+      <div class="coverage-card">
+        <div class="coverage-row">
+          <div class="kicker">coverage</div>
+          <div class="coverage-pct" data-display="coveragePct">0%</div>
+        </div>
+        <div class="coverage-note" data-display="coverageNote">fully covered</div>
+        <div class="coverage-potential" data-display="coveragePotential">potential EUR 0</div>
+      </div>
+
+      <div class="console-actions">
+        <button type="button" class="action-btn" data-report-trigger="consult">
+          <i class="fa-solid fa-user-tie"></i><span>Consultation</span>
+        </button>
+        <button type="button" class="action-btn action-btn--primary" data-report-trigger="memo">
+          <i class="fa-solid fa-file-lines"></i><span>Open the memo</span>
+        </button>
+        <button type="button" class="action-btn" data-report-trigger="truth">
+          <i class="fa-solid fa-scale-balanced"></i><span>Truth &amp; sources</span>
+        </button>
+      </div>
+
+      <div class="signoff">
+        Aning Film - always paranoid, never panicked.
+      </div>
     </div>
   </aside>
 
-  <main class="main" aria-label="Funding constellation and memo stage">
-    <section class="const-section">
-      <div class="const-kicker">
-        <i class="fa-solid fa-circle-nodes"></i>the constellation - sources of money
-      </div>
-
-      <div class="quick-rail" aria-label="Tablet and mobile controls">
-        <div class="quick-pills" role="toolbar" aria-label="Configuration pills">
-          <button type="button" class="pill-btn" data-pill="project" aria-expanded="false" aria-controls="configPanel">Project</button>
-          <button type="button" class="pill-btn" data-pill="modeRegion" aria-expanded="false" aria-controls="configPanel">Mode + Region</button>
-          <button type="button" class="pill-btn" data-pill="coverage" aria-expanded="false" aria-controls="configPanel">Coverage</button>
-          <button type="button" class="pill-btn" data-pill="memo" aria-expanded="false" aria-controls="memoPanel">Memo</button>
-          <button type="button" class="pill-btn" data-pill="truth" aria-expanded="false" aria-controls="truthPanel">Truth</button>
-
-          <div class="theme-toggle quick-theme-toggle" role="radiogroup" aria-label="Theme">
-            <button type="button" data-theme="auto"  aria-pressed="true" title="Auto">A</button>
-            <button type="button" data-theme="light" aria-pressed="false" title="Light"><i class="fa-solid fa-sun"></i></button>
-            <button type="button" data-theme="dark"  aria-pressed="false" title="Dark"><i class="fa-solid fa-moon"></i></button>
-          </div>
-        </div>
-
-        <div class="quick-controls">
-          <label class="quick-control">
-            <span class="quick-label">Budget</span>
-            <span class="quick-value" data-display="valBudget">EUR 1,200,000</span>
-            <input type="range" data-field="totalBudget"
-              min="80000" max="6000000" step="10000" value="1200000"
-              aria-label="Quick total budget">
-          </label>
-
-          <label class="quick-control">
-            <span class="quick-label">Secured</span>
-            <span class="quick-value" data-display="valSecured">62%</span>
-            <input type="range" data-field="securedPct"
-              min="0.05" max="1" step="0.01" value="0.62"
-              aria-label="Quick secured percent">
-            <span class="quick-sub" data-display="subSecured">EUR 744,000</span>
-          </label>
-
-          <label class="quick-control">
-            <span class="quick-label">Croatia</span>
-            <span class="quick-value" data-display="valCroatia">65%</span>
-            <input type="range" data-field="croatiaPct"
-              min="0" max="1" step="0.01" value="0.65"
-              aria-label="Quick Croatia percent">
-            <span class="quick-sub" data-display="subCroatia">EUR 780,000</span>
-          </label>
-        </div>
-      </div>
-
-      <svg class="const-svg" id="constSvg" aria-hidden="true"></svg>
-      <div class="const-hud" id="constHud"></div>
-    </section>
-
-    <section class="memo-section" id="memoPanel" aria-hidden="true">
-      <div class="memo-inner">
-        <div class="memo-head">
-          <div class="memo-kicker">
-            <i class="fa-solid fa-file-lines"></i>financing memo - projection 011
-          </div>
-          <button type="button" class="panel-close memo-close" id="memoClose" aria-label="Close memo panel">
-            <i class="fa-solid fa-xmark"></i>
+  <!-- ─── THE DOSSIER — the memo + truth, floating glass over the cosmos ─── -->
+  <div class="report" id="report" role="dialog" aria-modal="true"
+    aria-label="Financing details" aria-hidden="true" hidden>
+    <div class="report-glass">
+      <div class="report-head">
+        <div class="report-tabs" role="tablist" aria-label="Detail views">
+          <button type="button" class="report-tab" data-report-tab="memo"
+            role="tab" aria-selected="true">
+            <i class="fa-solid fa-file-lines"></i>memo
           </button>
-        </div>
-
-        <p class="memo-body">
-          We are producing a <span class="memo-token" id="memoProject">feature</span>
-          as a <span class="memo-token" id="memoMode">minority co-production</span>.
-          The total budget is
-          <span class="inline-input-wrap">
-            <input type="text" inputmode="numeric" class="inline-input" id="memoBudget"
-              aria-label="Total budget">
-            <span class="inline-suffix">EUR</span></span>,
-          of which
-          <span class="inline-input-wrap">
-            <input type="text" inputmode="numeric" class="inline-input" id="memoSecured"
-              aria-label="Secured percent">
-            <span class="inline-suffix">%</span></span>
-          is already secured. We expect to spend
-          <span class="inline-input-wrap">
-            <input type="text" inputmode="numeric" class="inline-input" id="memoCroatia"
-              aria-label="Croatia spend percent">
-            <span class="inline-suffix">%</span></span>
-          of that in Croatia.
-        </p>
-
-        <div class="ledger-head">
-          <div class="kicker">source</div>
-          <div class="kicker">basis</div>
-          <div class="kicker right">amount (EUR)</div>
-        </div>
-
-        <div id="ledger"></div>
-
-        <div class="total-row">
-          <div class="total-label">Total potential financing</div>
-          <div class="row-note" id="totalNote"></div>
-          <div class="total-amt" id="totalAmt">EUR 0</div>
-        </div>
-
-        <div class="gap-row">
-          <div class="gap-label" id="gapLabel"></div>
-          <div class="row-note" id="gapNote"></div>
-          <div class="gap-amt" id="gapAmt"></div>
-        </div>
-
-        <div class="footnote">
-          Strictly illustrative. Actual decisions sit with HAVC, the line producer,
-          and the auditor. For the rules, citations, and government sources see the
-          <a href="#" data-truth-trigger>truth &amp; sources</a> panel.
-        </div>
-      </div>
-    </section>
-
-    <section class="memo-section truth-section" id="truthPanel" aria-hidden="true">
-      <div class="memo-inner">
-        <div class="memo-head">
-          <div class="memo-kicker">
+          <button type="button" class="report-tab" data-report-tab="consult"
+            role="tab" aria-selected="false">
+            <i class="fa-solid fa-user-tie"></i>consultation
+          </button>
+          <button type="button" class="report-tab" data-report-tab="truth"
+            role="tab" aria-selected="false">
             <i class="fa-solid fa-scale-balanced"></i>truth &amp; sources
-          </div>
-          <button type="button" class="panel-close truth-close" id="truthClose" aria-label="Close truth panel">
-            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
+        <button type="button" class="panel-close" id="reportClose" aria-label="Close details">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-        <p class="memo-body truth-lede">
-          A live estimator built on the current Croatian rules. The hard
-          numbers come from Narodne novine; the soft ones (HAVC award sizing,
-          local top-ups) come from <span class="memo-token">producer practice</span>
-          and are labelled as such inside the constellation.
-        </p>
-
-        <div class="truth-section-list">
-
-          <div class="truth-block">
-            <div class="kicker truth-block-kicker"><i class="fa-solid fa-percent"></i>incentive rebate</div>
-            <p class="truth-block-body">
-              25% of qualifying Croatian spend, plus 5% if the production films in a
-              below-average-development region. Eligible spend is capped at 80% of
-              total budget. Minimum Croatian spend: €250,000 for a feature, €60,000
-              for a documentary. <strong>Shorts are not rebate-eligible.</strong>
-            </p>
+      <div class="report-scroll">
+        <!-- MEMO view — a ready-to-send email draft -->
+        <div class="report-view" data-report-view="memo" role="tabpanel">
+          <div class="memo-doc" id="memoDoc"></div>
+          <div class="memo-actions">
+            <button type="button" class="memo-action memo-action--primary" data-memo-copy>
+              <i class="fa-solid fa-envelope"></i><span>Copy for email</span>
+            </button>
+            <button type="button" class="memo-action" data-memo-copytext>
+              <i class="fa-solid fa-align-left"></i><span>Copy plain text</span>
+            </button>
+            <button type="button" class="memo-action" data-memo-mail>
+              <i class="fa-solid fa-paper-plane"></i><span>Open in mail</span>
+            </button>
           </div>
-
-          <div class="truth-block">
-            <div class="kicker truth-block-kicker"><i class="fa-solid fa-landmark"></i>havc minority co-production</div>
-            <p class="truth-block-body">
-              Available to projects with 50–85% secured financing. At least 60% of any
-              HAVC grant must be spent in Croatia. Award amounts are discretionary
-              (HAVC's Umjetničko vijeće decides per project) — the band shown in the
-              constellation is our practitioner estimate calibrated against
-              2024–2025 averages.
-            </p>
+          <div class="memo-meta">
+            Editable inputs live in the console — adjust there, then copy. For the rules and
+            sources see the
+            <button type="button" class="link-btn" data-report-tab="truth">truth &amp; sources</button> tab.
           </div>
-
-          <div class="truth-block">
-            <div class="kicker truth-block-kicker"><i class="fa-solid fa-building-columns"></i>local / municipal funds</div>
-            <p class="truth-block-body">
-              City and county culture funds (Zagreb, Istria, Rijeka, Split-Dalmatia,
-              Pula, …) typically top up once HAVC's minority approval is in hand —
-              the domino effect. Amounts vary; €10–25k is a common first-domino range.
-            </p>
-          </div>
-
-          <div class="truth-block">
-            <div class="kicker truth-block-kicker"><i class="fa-solid fa-square-root-variable"></i>eligibility math</div>
-            <p class="truth-block-body">
-              To apply for the rebate you need ≥ 70% of your Croatian spend secured —
-              not your total budget, since HAVC has no jurisdiction over non-Croatian
-              budget. To be an official minority co-production you need ≥ 15% Croatian
-              share, which is why anything above ~85% secured is essentially out of
-              scope for HAVC minority funding.
-            </p>
-          </div>
-
-          <div class="truth-block">
-            <div class="kicker truth-block-kicker"><i class="fa-solid fa-compass"></i>what this calculator is</div>
-            <p class="truth-block-body">
-              A live estimator for first-pass financing conversations. Real decisions
-              sit with HAVC, the line producer, and the auditor. The constellation
-              labels each source as <em>indicative</em> where the calc is using a
-              practitioner heuristic rather than a codified rule.
-            </p>
-          </div>
-
         </div>
 
-        <div class="truth-sources">
-          <div class="kicker truth-sources-kicker">authoritative sources</div>
-          <ul class="truth-source-list">
-            <li>
-              <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2024_01_9_173.html" target="_blank" rel="noopener">
-                NN 9/2024 — Pravilnik o poticanju ulaganja (current rebate amendment)
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.zakon.hr/c/podzakonski-propis/55210/pravilnik-o-poticanju-ulaganja-u-proizvodnju-audiovizualnih-djela---procisceni-tekst" target="_blank" rel="noopener">
-                Rebate Pravilnik — consolidated text (zakon.hr)
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/full/2023_08_95_1429.html" target="_blank" rel="noopener">
-                NN 95/2023 — HAVC funding Pravilnik
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2024_10_123_2052.html" target="_blank" rel="noopener">
-                Zakon o audiovizualnim djelatnostima — NN 123/2024
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://havc.hr/o-nama/javni-pozivi/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom-u-2026" target="_blank" rel="noopener">
-                HAVC — 2026 minority co-production call
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://filmingincroatia.hr/the-incentive-programme/" target="_blank" rel="noopener">
-                Filming in Croatia — official programme page
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://min-kulture.gov.hr/propisi-543/audiovizualne-djelatnosti-16235/16235" target="_blank" rel="noopener">
-                Ministry of Culture — AV regulations index
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </li>
-          </ul>
+        <!-- HUMAN CONSULT view -->
+        <div class="report-view" data-report-view="consult" role="tabpanel" hidden>
+          <p class="consult-lede">
+            I am Matija Radeljak from Aning Film. I made this app at an intersection of my film career, coding skills and just general curiousity and enthusiasm.
+          </p>
+
+          <div class="consult-section-list">
+            <div class="consult-block">
+              <div class="kicker consult-block-kicker"><i class="fa-solid fa-compass-drafting"></i>how i would use this app</div>
+              <p class="consult-block-body">
+                Estimates made here are for exploratory and ball-park purposes; it's meant to show you quickly and unambigously if your project can realistically expect financing support and to which degree so you can easily see if embarking on such a path is worth your time or not. 
+              </p>
+            </div>
+
+            <div class="consult-block">
+              <div class="kicker consult-block-kicker"><i class="fa-solid fa-handshake-angle"></i>what happens after the first pass</div>
+              <p class="consult-block-body">
+                Conventional wisdom dictates to check the 4 minority coproduction deadlines on <a href="https://havc.hr/o-nama/javni-pozivi/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom-u-2026">havc.hr</a> and establish contact with a Croatian producer.<br/>
+                I stand at your disposal for any consult on that matter <a href="mailto:matija@aningfilm.hr">over e-mail</a>.<br/>
+                <br/>Estimator assumes general European co-production realities such as the European convention on coproductions to which Croatia is the signatory of and material differences between co-productions and service productions.
+                <br/>These qualifications include the cultural viability tests, investment reciprocity, insurance standards, fees&escrow procedures etc. 
+              </p>
+            </div>
+
+            <div class="consult-block">
+              <div class="kicker consult-block-kicker"><i class="fa-solid fa-user-check"></i>what i can review with you</div>
+              <p class="consult-block-body">
+                I can review your package as a producer, help shape a credible financing path, recommend a list of viable producers and flag where
+                the assumptions are too optimistic before you lose time in formal applications.
+              </p>
+            </div>
+          </div>
+
+          <div class="consult-actions">
+            <a class="memo-action memo-action--primary" href="https://aningfilm.hr" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i><span>Visit aningfilm.hr</span>
+            </a>
+            <a class="memo-action" href="mailto:matija@aningfilm.hr?subject=FIC%20human%20consult">
+              <i class="fa-solid fa-envelope"></i><span>matija@aningfilm.hr</span>
+            </a>
+          </div>
+
+          <div class="footnote">
+            Consult copy is editorial and human-first. For codified legal anchors, use the
+            <button type="button" class="link-btn" data-report-tab="truth">truth &amp; sources</button> tab.
+          </div>
         </div>
 
-        <div class="footnote">
-          For the full auditor-level breakdown including line-by-line code citations,
-          see the standalone <a href="truth-report.html" target="_blank" rel="noopener">truth report</a>.
+        <!-- TRUTH view -->
+        <div class="report-view" data-report-view="truth" role="tabpanel" hidden>
+          <p class="truth-lede">
+            A live estimator built on the current Croatian rules. The hard
+            numbers come from Narodne novine; the soft ones (HAVC award sizing,
+            local top-ups) come from <span class="memo-token">producer practice</span>
+            and are labelled as such inside the constellation.
+          </p>
+
+          <div class="truth-section-list">
+            <div class="truth-block">
+              <div class="kicker truth-block-kicker"><i class="fa-solid fa-percent"></i>incentive rebate</div>
+              <p class="truth-block-body">
+                25% of qualifying Croatian spend, plus 5% if the production films in a
+                below-average-development region. Eligible spend is capped at 80% of
+                total budget. Minimum Croatian spend: &euro;250,000 for a feature, &euro;60,000
+                for a documentary. <strong>Shorts are not rebate-eligible.</strong>
+              </p>
+            </div>
+
+            <div class="truth-block">
+              <div class="kicker truth-block-kicker"><i class="fa-solid fa-landmark"></i>havc minority co-production</div>
+              <p class="truth-block-body">
+                Available to projects with 50&ndash;85% secured financing. At least 60% of any
+                HAVC grant must be spent in Croatia. Award amounts are discretionary
+                (HAVC's Umjetni&#269;ko vije&#263;e decides per project) &mdash; the band shown in the
+                constellation is our practitioner estimate calibrated against
+                2024&ndash;2025 averages.
+              </p>
+            </div>
+
+            <div class="truth-block">
+              <div class="kicker truth-block-kicker"><i class="fa-solid fa-building-columns"></i>local / municipal funds</div>
+              <p class="truth-block-body">
+                City and county culture funds (Zagreb, Istria, Rijeka, Split-Dalmatia,
+                Pula, &hellip;) typically top up once HAVC's minority approval is in hand &mdash;
+                the domino effect. Amounts vary; &euro;10&ndash;25k is a common first-domino range.
+              </p>
+            </div>
+
+            <div class="truth-block">
+              <div class="kicker truth-block-kicker"><i class="fa-solid fa-square-root-variable"></i>eligibility math</div>
+              <p class="truth-block-body">
+                To apply for the rebate you need &ge; 70% of your Croatian spend secured &mdash;
+                not your total budget, since HAVC has no jurisdiction over non-Croatian
+                budget. To be an official minority co-production you need &ge; 15% Croatian
+                share, which is why anything above ~85% secured is essentially out of
+                scope for HAVC minority funding.
+              </p>
+            </div>
+
+            <div class="truth-block">
+              <div class="kicker truth-block-kicker"><i class="fa-solid fa-compass"></i>what this calculator is</div>
+              <p class="truth-block-body">
+                A live estimator for first-pass financing conversations. Real decisions
+                sit with HAVC, the line producer, and the auditor. The constellation
+                labels each source as <em>indicative</em> where the calc is using a
+                practitioner heuristic rather than a codified rule.
+              </p>
+            </div>
+          </div>
+
+          <div class="truth-sources">
+            <div class="kicker truth-sources-kicker">authoritative sources</div>
+            <ul class="truth-source-list">
+              <li>
+                <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2024_01_9_173.html" target="_blank" rel="noopener">
+                  NN 9/2024 &mdash; Pravilnik o poticanju ulaganja (current rebate amendment)
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.zakon.hr/c/podzakonski-propis/55210/pravilnik-o-poticanju-ulaganja-u-proizvodnju-audiovizualnih-djela---procisceni-tekst" target="_blank" rel="noopener">
+                  Rebate Pravilnik &mdash; consolidated text (zakon.hr)
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/full/2023_08_95_1429.html" target="_blank" rel="noopener">
+                  NN 95/2023 &mdash; HAVC funding Pravilnik
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2024_10_123_2052.html" target="_blank" rel="noopener">
+                  Zakon o audiovizualnim djelatnostima &mdash; NN 123/2024
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://havc.hr/o-nama/javni-pozivi/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom-u-2026" target="_blank" rel="noopener">
+                  HAVC &mdash; 2026 minority co-production call
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://filmingincroatia.hr/the-incentive-programme/" target="_blank" rel="noopener">
+                  Filming in Croatia &mdash; official programme page
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://min-kulture.gov.hr/propisi-543/audiovizualne-djelatnosti-16235/16235" target="_blank" rel="noopener">
+                  Ministry of Culture &mdash; AV regulations index
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footnote">
+            For the full auditor-level breakdown including line-by-line code citations,
+            see the standalone <a href="truth-report.html" target="_blank" rel="noopener">truth report</a>.
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section class="config-sheet" id="configPanel" aria-hidden="true">
-      <div class="config-inner">
-        <div class="config-head">
-          <div class="kicker" id="configTitle">configuration</div>
-          <button type="button" class="panel-close" id="sheetClose" aria-label="Close configuration sheet">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
+  <footer class="af-footer" aria-label="Aning Film footer">
+    <div class="af-footer-signoff">Aning Film - always paranoid, never panicked.</div>
+    <a class="af-footer-link" href="mailto:matija@aningfilm.hr?subject=FIC%20human%20consult">human consult: matija@aningfilm.hr</a>
+  </footer>
 
-        <div class="sheet-section" data-sheet-section="project" hidden>
-          <div class="kicker">project</div>
-          <div class="project-chips">
-            <button type="button" class="p-chip active" data-project="feature">
-              <i class="fa-solid fa-film"></i>
-              <span>Feature</span>
-            </button>
-            <button type="button" class="p-chip" data-project="short">
-              <i class="fa-solid fa-clapperboard"></i>
-              <span>Short</span>
-            </button>
-            <button type="button" class="p-chip" data-project="featureDocumentary">
-              <i class="fa-solid fa-tv"></i>
-              <span>Documentary</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="sheet-section" data-sheet-section="modeRegion" hidden>
-          <div class="kicker">mode</div>
-          <div class="mode-row">
-            <button type="button" class="mode-btn" data-mode="service">
-              <i class="fa-solid fa-briefcase"></i>
-              <span>Service</span>
-            </button>
-            <button type="button" class="mode-btn active" data-mode="minority">
-              <i class="fa-solid fa-handshake"></i>
-              <span>Minority</span>
-            </button>
-          </div>
-
-          <div class="kicker section-kicker">region</div>
-          <div class="mode-row">
-            <button type="button" class="mode-btn region-btn active" data-region="standard">
-              <i class="fa-solid fa-map"></i>
-              <span>Standard</span>
-            </button>
-            <button type="button" class="mode-btn region-btn" data-region="lowdev">
-              <i class="fa-solid fa-mountain-sun"></i>
-              <span>Low-dev</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="sheet-section" data-sheet-section="coverage" hidden>
-          <div class="coverage-card compact">
-            <div class="kicker">coverage snapshot</div>
-            <div class="coverage-pct" data-display="coveragePct">0%</div>
-            <div class="coverage-note" data-display="coverageNote">fully covered</div>
-            <div class="coverage-potential" data-display="coveragePotential">potential EUR 0</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="panel-backdrop" id="sheetBackdrop" hidden></div>
-  </main>
+  <div class="overlay-backdrop" id="backdrop" hidden></div>
+  <div class="sr-only" aria-live="polite" id="liveStatus"></div>
 </div>
 
 <script src="calc.js"></script>

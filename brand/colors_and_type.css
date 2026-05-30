@@ -59,6 +59,22 @@ body.theme-dark {
   --fg-dim:     var(--paper-dim);
   --accent:     var(--red);
 
+  /* Universe effects — glass / glow / starfield / crawl.
+   * Surfaced as tokens so the light theme is a first-class mirror, not an
+   * afterthought. The starfield + nebula read very differently on cream, so
+   * their strength is driven from here (see app.js buildConstellation). */
+  --glass-bg:     rgba(46, 37, 34, 0.55);   /* smoked near-black panel fill */
+  --glass-bg-2:   rgba(56, 43, 39, 0.42);   /* secondary glass tint */
+  --glass-border: rgba(244, 237, 226, 0.10);/* faint catch-light edge */
+  --glass-glow:   rgba(193, 72, 67, 0.28);  /* red energy bloom */
+  --glass-blur:   14px;
+  --glass-shadow: 0 10px 44px rgba(20, 16, 13, 0.55);
+  --star-fill:    #f4ede2;                   /* warm cream specks */
+  --star-opacity: 0.55;
+  --crawl-fg:     #f4ede2;                   /* crawl text */
+  --crawl-fade:   #2e2522;                   /* horizon the crawl recedes into */
+  --nebula-strength: 0.45;                   /* multiplier on nebula opacity */
+
   color-scheme: dark;
 }
 
@@ -85,6 +101,20 @@ body.theme-light {
   --fg-dim: var(--paper-dim);
   --accent: var(--red);
 
+  /* Universe effects — light "printed star-map" treatment: frosted-cream
+   * glass, ink specks instead of glowing stars, a gentle warm nebula. */
+  --glass-bg:     rgba(244, 237, 226, 0.62); /* frosted cream */
+  --glass-bg-2:   rgba(255, 251, 244, 0.50);
+  --glass-border: rgba(42, 32, 29, 0.14);
+  --glass-glow:   rgba(193, 72, 67, 0.20);
+  --glass-blur:   16px;
+  --glass-shadow: 0 10px 36px rgba(120, 96, 72, 0.22);
+  --star-fill:    #8a7e72;                   /* muted-ink specks */
+  --star-opacity: 0.42;
+  --crawl-fg:     #2a201d;                   /* dark ink crawl */
+  --crawl-fade:   #f4ede2;                   /* into a cream haze */
+  --nebula-strength: 0.32;
+
   color-scheme: light;
 }
 
@@ -97,6 +127,11 @@ body.theme-light {
     --still-bg: #efe5d4; --edge: #c8bea8; --edge-on: #8a7a64;
     --nebula-a: #e8c9a8; --nebula-b: #d8b893;
     --bg: var(--ink); --fg: var(--paper); --fg-dim: var(--paper-dim);
+    --glass-bg: rgba(244,237,226,0.62); --glass-bg-2: rgba(255,251,244,0.50);
+    --glass-border: rgba(42,32,29,0.14); --glass-glow: rgba(193,72,67,0.20);
+    --glass-blur: 16px; --glass-shadow: 0 10px 36px rgba(120,96,72,0.22);
+    --star-fill: #8a7e72; --star-opacity: 0.42;
+    --crawl-fg: #2a201d; --crawl-fade: #f4ede2; --nebula-strength: 0.32;
   }
 }
 
