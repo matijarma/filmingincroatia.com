@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Truth Report · Financing Calculator · 2026</title>
+<meta name="description" content="Audit of miniapps/ffc against primary Croatian audiovisual regulations. By Aning Film d.o.o.">
+<link rel="icon" href="https://aningfilm.hr/wp-content/uploads/2023/03/AningFilmIcon.png" sizes="32x32">
+
+<link rel="stylesheet" href="brand/colors_and_type.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  /* ─── Page shell ─────────────────────────────────────────── */
+  html, body { margin: 0; background: var(--ink); color: var(--paper); }
+  body {
+    font-family: var(--font-body);
+    font-size: var(--body-md);
+    line-height: var(--lh-body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background:
+      radial-gradient(62% 60% at 14% 8%, rgba(90,58,50,0.28), transparent 66%),
+      radial-gradient(58% 52% at 88% 92%, rgba(193,72,67,0.10), transparent 72%),
+      var(--ink);
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 72px 32px 96px;
+  }
+
+  /* ─── Hero ───────────────────────────────────────────────── */
+  .hero {
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+  .hero .kicker { color: var(--muted); font-size: 11px; }
+  .hero .kicker i { color: var(--red); margin-right: 8px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(44px, 6vw, 72px);
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+    margin: 14px 0 18px;
+    color: var(--paper);
+    text-wrap: balance;
+  }
+  .hero h1 .accent { color: var(--red); }
+  .hero .lede {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.4;
+    letter-spacing: -0.012em;
+    color: var(--paper-dim);
+    max-width: 720px;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 36px;
+  }
+  .meta-cell .kicker { display: block; margin-bottom: 4px; }
+  .meta-cell .value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+  }
+
+  /* ─── Sections ───────────────────────────────────────────── */
+  section { margin: 64px 0; }
+  section > .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 3vw, 38px);
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--paper);
+  }
+  .section-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-head .kicker i { color: var(--red); margin-right: 6px; }
+
+  /* ─── Bottom-line callout ────────────────────────────────── */
+  .callout {
+    border-left: 3px solid var(--red);
+    background: rgba(193,72,67,0.06);
+    padding: 18px 22px;
+    margin: 32px 0 0;
+  }
+  .callout .kicker { color: var(--red); margin-bottom: 6px; display: block; }
+  .callout p {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.4;
+    letter-spacing: -0.012em;
+    color: var(--paper);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* ─── Verdict tokens ─────────────────────────────────────── */
+  .v {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  .v i { font-size: 10px; }
+  .v.ok    { color: #7fb38a; border-color: rgba(127,179,138,0.46); background: rgba(127,179,138,0.08); }
+  .v.warn  { color: #e8a04a; border-color: rgba(232,160,74,0.46); background: rgba(232,160,74,0.08); }
+  .v.bad   { color: var(--red); border-color: rgba(193,72,67,0.55); background: rgba(193,72,67,0.10); }
+
+  /* ─── TL;DR ledger ───────────────────────────────────────── */
+  .tldr-grid {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    column-gap: 18px;
+    row-gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .tldr-row {
+    display: contents;
+  }
+  .tldr-row > * {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-self: center;
+  }
+  .tldr-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .tldr-claim {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--paper);
+    line-height: 1.45;
+  }
+  .tldr-claim code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--paper-dim);
+    background: rgba(244,237,226,0.05);
+    padding: 1px 5px;
+    border: 1px solid var(--rule);
+    margin-left: 4px;
+  }
+  .tldr-claim .note {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+  .tldr-verdict { text-align: right; }
+
+  /* ─── Sources table ──────────────────────────────────────── */
+  .sources {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .src-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr) auto;
+    gap: 22px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .src-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.012em;
+    color: var(--paper);
+  }
+  .src-govern {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .src-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--paper-dim);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--rule);
+    transition: text-decoration-color 160ms ease, color 160ms ease;
+    white-space: nowrap;
+  }
+  .src-link:hover { color: var(--red); text-decoration-color: var(--red); }
+  .src-link i { margin-left: 6px; font-size: 9px; }
+
+  .scheme-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .scheme-card {
+    border: 1px solid var(--rule);
+    padding: 18px 20px;
+    background: rgba(56,43,39,0.45);
+  }
+  .scheme-card .kicker {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--red);
+  }
+  .scheme-card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+    color: var(--paper);
+  }
+  .scheme-card p {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--paper-dim);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── Claim cards ────────────────────────────────────────── */
+  .claim {
+    border-top: 1px solid var(--rule);
+    padding: 28px 0 30px;
+  }
+  .claim:last-child { border-bottom: 1px solid var(--rule); }
+  .claim-head {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    column-gap: 18px;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+  .claim-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .claim-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 26px);
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .claim-body {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    column-gap: 18px;
+    row-gap: 14px;
+  }
+  .claim-body > .field-label {
+    grid-column: 1;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+  .claim-body > .field-val {
+    grid-column: 2;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--paper);
+  }
+  .field-val.code-block {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--paper-dim);
+    background: rgba(244,237,226,0.04);
+    border: 1px solid var(--rule);
+    padding: 10px 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .field-val.code-block .filepath {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .field-val.quote {
+    border-left: 2px solid var(--red);
+    padding: 4px 0 4px 14px;
+    color: var(--paper);
+  }
+  .field-val.quote .gloss {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 12px;
+    font-style: italic;
+  }
+  .field-val.rem {
+    color: var(--paper);
+  }
+  .field-val.rem strong { color: var(--red); font-weight: 700; }
+
+  /* Inline code inside paragraphs */
+  .claim-body code,
+  p code,
+  li code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: rgba(244,237,226,0.06);
+    border: 1px solid var(--rule);
+    padding: 1px 5px;
+    color: var(--paper-dim);
+  }
+
+  /* ─── Patch list ─────────────────────────────────────────── */
+  .patch-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: patch;
+    border-top: 1px solid var(--rule);
+  }
+  .patch-list li {
+    counter-increment: patch;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    column-gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .patch-list li::before {
+    content: counter(patch, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.06em;
+  }
+  .patch-list .patch-where {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--paper);
+    background: rgba(193,72,67,0.10);
+    border: 1px solid rgba(193,72,67,0.35);
+    padding: 1px 6px;
+    margin-right: 6px;
+  }
+  .patch-list p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--paper);
+  }
+
+  /* ─── Open questions list ────────────────────────────────── */
+  .open-q {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .open-q li {
+    padding: 14px 0 14px 28px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--paper-dim);
+  }
+  .open-q li::before {
+    content: "?";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--red);
+    font-weight: 700;
+  }
+  .open-q li strong {
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  /* ─── Footer ─────────────────────────────────────────────── */
+  .signoff {
+    margin-top: 80px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .signoff .right { text-align: right; }
+
+  /* ─── Smaller screens ────────────────────────────────────── */
+  @media (max-width: 720px) {
+    .page { padding: 48px 18px 64px; }
+    .hero h1 { font-size: 40px; }
+    .src-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .src-link { white-space: normal; }
+    .scheme-split { grid-template-columns: 1fr; }
+    .tldr-grid {
+      grid-template-columns: 28px minmax(0, 1fr);
+    }
+    .tldr-verdict {
+      grid-column: 2;
+      text-align: left;
+      padding-top: 0 !important;
+      padding-bottom: 14px !important;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tldr-row > .tldr-claim {
+      border-bottom: 0;
+      padding-bottom: 4px;
+    }
+    .tldr-row > .tldr-num {
+      border-bottom: 0;
+    }
+    .claim-head, .claim-body { grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; }
+    .patch-list li { grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; }
+  }
+
+  /* ─── Print ──────────────────────────────────────────────── */
+  @media print {
+    body { background: white; color: #2e2522; }
+    .page { max-width: none; padding: 24px; }
+    .v.ok    { color: #2f6b3c; }
+    .v.warn  { color: #8a5a18; }
+    .v.bad   { color: #8a2a26; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+</head>
+
+<body class="theme-dark">
+
+<div class="page">
+
+  <!-- ─── HERO ─── -->
+  <header class="hero">
+    <div class="kicker"><i class="fa-solid fa-scale-balanced"></i>truth report · ffc · 2026-05-19</div>
+    <h1>Financing Calculator <span class="accent">vs.</span> the actual Croatian rules.</h1>
+    <p class="lede">
+      An audit of every numeric, eligibility and citation claim the
+      calculator makes, cross-checked against Narodne novine, HAVC,
+      the Ministry of Culture, and the official Filming in Croatia
+      programme page — then re-graded against producer practitioner
+      reality and the code updated to match.
+    </p>
+
+    <div class="hero-meta">
+      <div class="meta-cell">
+        <span class="kicker">subject</span>
+        <span class="value">miniapps/ffc/{calc.js, app.js, index.html}</span>
+      </div>
+      <div class="meta-cell">
+        <span class="kicker">auditor</span>
+        <span class="value">Aning Film d.o.o. — internal review</span>
+      </div>
+      <div class="meta-cell">
+        <span class="kicker">verdict legend</span>
+        <span class="value">
+          <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+          <span class="v warn"><i class="fa-solid fa-triangle-exclamation"></i>signalled estimate</span>
+          <span class="v bad"><i class="fa-solid fa-xmark"></i>wrong</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="kicker">bottom line · revised after producer review</span>
+      <p>
+        Every behaviour in the calculator is now either codified law (rebate maths,
+        Croatian-spend minimums, HAVC eligibility floor, 60% domestic cover) or a
+        deliberate practitioner heuristic that the UI explicitly labels as such
+        (HAVC grant sizing, local-grant follow-on). One actual bug was found and
+        fixed — shorts were being treated as rebate-eligible. One citation was
+        wrong and is now correct.
+      </p>
+    </div>
+  </header>
+
+  <!-- ─── TL;DR ─── -->
+  <section>
+    <div class="section-head">
+      <h2>TL;DR verdict ledger</h2>
+      <span class="kicker"><i class="fa-solid fa-list-check"></i>15 claims · scored</span>
+    </div>
+
+    <div class="tldr-grid">
+
+      <div class="tldr-row">
+        <div class="tldr-num">01</div>
+        <div class="tldr-claim">Rebate base rate <strong>25%</strong> <code>calc.js:110</code><span class="note">Pravilnik Art 3(1)</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">02</div>
+        <div class="tldr-claim"><strong>+5% low-development uplift</strong> <code>calc.js:111</code><span class="note">Pravilnik Art 3(2)</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">03</div>
+        <div class="tldr-claim">Eligible spend capped at <strong>80% of total budget</strong> <code>calc.js:108</code><span class="note">Pravilnik Art 3(3) — comment cites article correctly</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">04</div>
+        <div class="tldr-claim">Min Croatian spend, feature = <strong>€250,000</strong> <code>calc.js:28</code><span class="note">NN 9/2024 Art 5(7)(1)</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">05</div>
+        <div class="tldr-claim">Min Croatian spend, documentary = <strong>€60,000</strong> <code>calc.js:30</code><span class="note">NN 9/2024 Art 5(7)(1)</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">06</div>
+        <div class="tldr-claim">Shorts are not rebate-eligible <code>calc.js:88-90</code><span class="note">Fixed · <code>calcRebate</code> short-circuits for <code>projectType === 'short'</code>; UI ledger row shows the disqualification (NN 9/2024 Art 5(7)(1))</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">07</div>
+        <div class="tldr-claim">HAVC requires <strong>≥ 50% secured</strong> <code>calc.js:57</code><span class="note">NN 95/2023 Art 31(2)</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">08</div>
+        <div class="tldr-claim">HAVC cuts off at <strong>&lt; 85% secured</strong> <code>calc.js:57</code><span class="note">Math + market reality — a minority co-prod needs ≥15% Croatian share, and no European fund tops up a final budget gap with minority funds</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">09</div>
+        <div class="tldr-claim"><strong>60%</strong> of HAVC funds must be spent in Croatia <code>calc.js:61</code><span class="note">NN 95/2023 Art 35(1)</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">10</div>
+        <div class="tldr-claim">HAVC grant range <strong>€30k–€75k</strong> feature / €15k–€50k short <code>calc.js:39-43</code><span class="note">Practitioner reference band, deliberately conservative; anchored to HAVC's stable annual envelope (~€15M in 2026). UI labels the row "indicative · discretionary."</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">11</div>
+        <div class="tldr-claim">HAVC <strong>grant formula</strong> (linear in secured%) <code>calc.js:67-68</code><span class="note">Transparent generalisation across HAVC's discretionary minority awards. UI labels the row "indicative · discretionary" — the formula is not asserted as law.</span></div>
+        <div class="tldr-verdict"><span class="v warn"><i class="fa-solid fa-triangle-exclamation"></i>signalled estimate</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">12</div>
+        <div class="tldr-claim"><strong>Local grants</strong> €10k–€25k, unlock at ≥ 75% secured <code>calc.js:74-82</code><span class="note">Real domino effect — once HAVC stamps minority approval, city/county funds routinely top up. UI now reads "follows HAVC approval."</span></div>
+        <div class="tldr-verdict"><span class="v warn"><i class="fa-solid fa-triangle-exclamation"></i>signalled estimate</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">13</div>
+        <div class="tldr-claim">Rebate requires <strong>70% of Croatia spend</strong> secured <code>calc.js:102-104</code><span class="note">Operational reality — HAVC has no jurisdiction over non-Croatian budget; the strict total-budget reading would be unenforceable for foreign-led productions</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">14</div>
+        <div class="tldr-claim">Service productions ineligible for HAVC minority <code>calc.js:119-121</code><span class="note">Implicit in CoE Convention + NN 95/2023 Art 30/31</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+      <div class="tldr-row">
+        <div class="tldr-num">15</div>
+        <div class="tldr-claim">Footer citation <code>index.html:215-222</code><span class="note">Fixed · now cites the rebate stack (NN 70/2019, NN 152/2022, NN 9/2024) and the HAVC funding stack (NN 95/2023 + Zakon o AV NN 61/2018, NN 114/2022, NN 123/2024) separately</span></div>
+        <div class="tldr-verdict"><span class="v ok"><i class="fa-solid fa-check"></i>correct</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SOURCES ─── -->
+  <section>
+    <div class="section-head">
+      <h2>Authoritative sources</h2>
+      <span class="kicker"><i class="fa-solid fa-book"></i>primary &amp; quasi-primary</span>
+    </div>
+
+    <div class="sources">
+      <div class="src-row">
+        <div class="src-name">NN 70/2019</div>
+        <div class="src-govern">Base text of the rebate (incentive) Pravilnik. Issued under Zakon o poticanju ulaganja.</div>
+        <a class="src-link" href="https://narodne-novine.nn.hr/clanci/sluzbeni/2019_07_70_1471.html" target="_blank" rel="noopener">narodne-novine.nn.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">NN 152/2022</div>
+        <div class="src-govern">First amendment to the rebate Pravilnik.</div>
+        <a class="src-link" href="https://narodne-novine.nn.hr/clanci/sluzbeni/full/2022_12_152_2396.html" target="_blank" rel="noopener">narodne-novine.nn.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">NN 9/2024</div>
+        <div class="src-govern">Current amendment to the rebate Pravilnik. Sets EUR-denominated minimum spend thresholds (post-kuna conversion).</div>
+        <a class="src-link" href="https://narodne-novine.nn.hr/clanci/sluzbeni/2024_01_9_173.html" target="_blank" rel="noopener">narodne-novine.nn.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">Pročišćeni tekst (zakon.hr)</div>
+        <div class="src-govern">Consolidated reading text of the rebate Pravilnik. Useful for article cross-reference.</div>
+        <a class="src-link" href="https://www.zakon.hr/c/podzakonski-propis/55210/pravilnik-o-poticanju-ulaganja-u-proizvodnju-audiovizualnih-djela---procisceni-tekst" target="_blank" rel="noopener">zakon.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">NN 95/2023</div>
+        <div class="src-govern">Pravilnik za provedbu Nacionalnog programa — the HAVC funding rulebook (minority calls, awards, payouts). <strong>Not</strong> the rebate rulebook.</div>
+        <a class="src-link" href="https://narodne-novine.nn.hr/clanci/sluzbeni/full/2023_08_95_1429.html" target="_blank" rel="noopener">narodne-novine.nn.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">HAVC — Javni poziv za manjinske koprodukcije u 2026.</div>
+        <div class="src-govern">Current minority co-prod public call; defers grant amounts to the annual Godišnji plan.</div>
+        <a class="src-link" href="https://havc.hr/o-nama/javni-pozivi/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom/filmske-koprodukcije-s-manjinskim-hrvatskim-udjelom-u-2026" target="_blank" rel="noopener">havc.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">Zakon o audiovizualnim djelatnostima · NN 123/2024</div>
+        <div class="src-govern">Statutory basis for both schemes (most recent amendment).</div>
+        <a class="src-link" href="https://narodne-novine.nn.hr/clanci/sluzbeni/2024_10_123_2052.html" target="_blank" rel="noopener">narodne-novine.nn.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">Filming in Croatia — programme page</div>
+        <div class="src-govern">Plain-language English summary published by HAVC.</div>
+        <a class="src-link" href="https://filmingincroatia.hr/the-incentive-programme/" target="_blank" rel="noopener">filmingincroatia.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+
+      <div class="src-row">
+        <div class="src-name">Ministarstvo kulture i medija — Audiovizualne djelatnosti (propisi)</div>
+        <div class="src-govern">Master index of currently in-force AV regulations.</div>
+        <a class="src-link" href="https://min-kulture.gov.hr/propisi-543/audiovizualne-djelatnosti-16235/16235" target="_blank" rel="noopener">min-kulture.gov.hr<i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+
+    <div class="scheme-split">
+      <div class="scheme-card">
+        <span class="kicker">scheme · 01</span>
+        <h3>Rebate / incentive</h3>
+        <p>
+          Cash back to producers spending in Croatia. Governed by
+          <strong>NN 70/2019 + NN 152/2022 + NN 9/2024</strong>,
+          under the Zakon o poticanju ulaganja.
+        </p>
+      </div>
+      <div class="scheme-card">
+        <span class="kicker">scheme · 02</span>
+        <h3>HAVC funding</h3>
+        <p>
+          Grants from the Croatian audiovisual budget to co-producers and
+          authors. Governed by <strong>NN 95/2023</strong>, under the
+          Zakon o audiovizualnim djelatnostima
+          (NN 61/2018, NN 114/2022, NN 123/2024).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CLAIM-BY-CLAIM AUDIT ─── -->
+  <section>
+    <div class="section-head">
+      <h2>Claim-by-claim audit</h2>
+      <span class="kicker"><i class="fa-solid fa-magnifying-glass-chart"></i>15 dossiers</span>
+    </div>
+
+    <!-- C01 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">01</div>
+        <h3 class="claim-title">25% rebate base rate</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:110</span>rebate: 0.25 * eligibleSpend</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          Pravilnik Art 3(1): the producer is entitled to 25% of eligible Croatian costs.
+        </div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">Correct — no remediation needed.</div>
+      </div>
+    </article>
+
+    <!-- C02 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">02</div>
+        <h3 class="claim-title">+5% low-development uplift</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:111</span>extraRebate: lowDevRegion ? 0.05 * eligibleSpend : 0</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          Pravilnik Art 3(2): the rate is enhanced to 30% in regions of below-average
+          development per Zakon o regionalnom razvoju.
+        </div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">Modelling as base 25 + additive 5 is mathematically identical to a 30% combined rate. Fine.</div>
+      </div>
+    </article>
+
+    <!-- C03 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">03</div>
+        <h3 class="claim-title">Eligible spend capped at 80% of total budget</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:108</span>const eligibleSpend = Math.min(croatiaSpend, 0.8 * totalBudget);</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          „Ukupni iznos troškova učinjenih u Republici Hrvatskoj … ne smije prelaziti 80 % cjelokupnog proračuna." — Pravilnik Art 3(3)
+          <span class="gloss">Total Croatian costs cannot exceed 80% of the full budget.</span>
+        </div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">Correct, and the inline code comment cites the article correctly.</div>
+      </div>
+    </article>
+
+    <!-- C04 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">04</div>
+        <h3 class="claim-title">Feature minimum Croatian spend €250,000</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:28</span>feature: 250000,</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          „za dugometražni igrani film: 250.000,00 eura." — NN 9/2024 Art 5(7)(1)
+        </div>
+        <div class="field-label">note</div>
+        <div class="field-val rem">
+          The consolidated text on zakon.hr still shows €265,445.62 — that is a mechanical
+          kuna→EUR conversion of the pre-2024 threshold (2,000,000 HRK ÷ 7.53450). NN 9/2024
+          replaced it with the round €250,000.
+        </div>
+      </div>
+    </article>
+
+    <!-- C05 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">05</div>
+        <h3 class="claim-title">Documentary minimum Croatian spend €60,000</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:30</span>featureDocumentary: 60000,</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">„za dokumentarni film: 60.000,00 eura." — NN 9/2024 Art 5(7)(1)</div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">Correct.</div>
+      </div>
+    </article>
+
+    <!-- C06 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">06</div>
+        <h3 class="claim-title">Shorts are not rebate-eligible · now enforced</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          NN 9/2024 Art 5(7)(1) enumerates: feature (€250k), TV film (€150k), TV episode (€100k),
+          documentary / animation (€60k). <strong>Shorts are not enumerated</strong> and are
+          therefore not rebate-eligible.
+        </div>
+        <div class="field-label">fix</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:88-90 · calcRebate()</span>if (projectType === 'short') {
+  return { rebate: 0, extraRebate: 0, eligible: false, reason: 'short-ineligible' };
+}</div>
+        <div class="field-label">ui</div>
+        <div class="field-val rem">
+          The Short chip remains available — shorts are still eligible for HAVC minority
+          funding under NN 95/2023 Art 30. When Short is selected the rebate ledger row
+          renders disabled with the note <em>"Short films are not rebate-eligible
+          (Pravilnik NN 9/2024 Art 5(7)(1)). Shorts can still apply for HAVC minority funding."</em>
+          The constellation rebate node carries the same message in short form.
+        </div>
+      </div>
+    </article>
+
+    <!-- C07 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">07</div>
+        <h3 class="claim-title">HAVC requires ≥ 50% secured</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:57</span>if (securedPct >= 0.85 || securedPct &lt; 0.5) return 0;</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          „dokaz o osiguranih minimalno 50 % potrebnih financijskih sredstava prema planu financiranja." — NN 95/2023 Art 31(2)
+        </div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">Lower bound correct.</div>
+      </div>
+    </article>
+
+    <!-- C08 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">08</div>
+        <h3 class="claim-title">HAVC cuts off above 85% secured · math + market practice</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:57</span>if (securedPct >= 0.85 || securedPct &lt; 0.5) return 0;</div>
+        <div class="field-label">reasoning</div>
+        <div class="field-val rem">
+          Not an arbitrary business rule. An official minority Croatian co-production needs
+          <strong>≥ 15% Croatian share</strong>. Above 85% secured, two scenarios:
+          <br><br>
+          <strong>1.</strong> The remaining gap is asked entirely from HAVC — out of
+          character for any European film fund, which doesn't come in to close a final
+          budget gap.
+          <br>
+          <strong>2.</strong> The total budget is so large that the HAVC ask is a vanishing
+          percentage, in which case the Croatian co-producer would still need to lift the
+          Croatian share back to the 15% minority threshold.
+          <br><br>
+          In practice the real ceiling is closer to ~70% secured; &gt;85% is essentially
+          theoretical. The calc treats it as out-of-scope to match market reality.
+        </div>
+        <div class="field-label">fix</div>
+        <div class="field-val rem">
+          The <code>calcHAVC</code> comment block now explains the cutoff as math +
+          market practice rather than implying NN 95/2023 says so.
+        </div>
+      </div>
+    </article>
+
+    <!-- C09 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">09</div>
+        <h3 class="claim-title">60% of HAVC funds must be spent in Croatia</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:61</span>const havcCapFromCroatia = croatiaSpend / 0.6;</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          „najmanje 60 % odobrenih sredstava mora biti potrošeno u Republici Hrvatskoj." — NN 95/2023 Art 35(1)
+        </div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">
+          Correct. The cap solves <code>0.6 · grant ≤ croatiaSpend ⇒ grant ≤ croatiaSpend / 0.6</code>,
+          which is exactly what the code computes.
+        </div>
+      </div>
+    </article>
+
+    <!-- C10 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">10</div>
+        <h3 class="claim-title">HAVC grant range · practitioner reference</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:39-43</span>const HAVC_RANGE = {
+  feature:           { min: 30000, max: 75000 },
+  featureDocumentary:{ min: 30000, max: 75000 },
+  short:             { min: 15000, max: 50000 },
+};</div>
+        <div class="field-label">reasoning</div>
+        <div class="field-val rem">
+          HAVC awards aren't codified per Pravilnik; per-project amounts are set annually
+          by HAVC's Godišnji plan against an envelope of roughly <strong>€15M total in
+          2026</strong>. The minority co-production share has been roughly flat
+          <em>in absolute terms</em> over the past decade — despite inflation and the
+          kuna-to-euro transition — a strong signal that real awards stay within a narrow
+          band. Aning Film's reference range is deliberately conservative against 2024–2025
+          award rounds (average minority feature award ~€40–45k).
+        </div>
+        <div class="field-label">ui signal</div>
+        <div class="field-val rem">
+          When the HAVC node activates, the constellation note reads
+          <em>"indicative · discretionary"</em> and the memo row reads
+          <em>"Indicative · awarded discretionarily by HAVC Umjetničko vijeće · capped at
+          60% domestic cover."</em> The user is not led to read these numbers as a
+          statutory range.
+        </div>
+      </div>
+    </article>
+
+    <!-- C11 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">11</div>
+        <h3 class="claim-title">HAVC grant formula · transparent generalisation</h3>
+        <span class="v warn"><i class="fa-solid fa-triangle-exclamation"></i>signalled estimate</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:67-68</span>const extraPts = Math.max(0, securedPct - 0.5) * 10;
+const baseFinancing = 0.05 * totalBudget + extraPts * 0.01 * totalBudget;</div>
+        <div class="field-label">reasoning</div>
+        <div class="field-val rem">
+          HAVC awards are decided per project by the Umjetničko vijeće (NN 95/2023
+          Art 6–8) on artistic / cultural merit. There is no statutory linear relationship
+          between secured% and grant size. The calc uses a deliberately simple shape so
+          a producer can see how the estimate would move as their secured% climbs — the
+          underlying mechanism is signalled implicitly by the
+          <em>"indicative · discretionary"</em> label rather than asserted as a formula.
+          Acceptable for an estimator; would not be acceptable in a contract or grant
+          application.
+        </div>
+        <div class="field-label">fix</div>
+        <div class="field-val rem">
+          The <code>calcHAVC</code> comment block now makes the heuristic explicit so a
+          future maintainer is not misled.
+        </div>
+      </div>
+    </article>
+
+    <!-- C12 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">12</div>
+        <h3 class="claim-title">"Local grants" · real domino effect, signalled</h3>
+        <span class="v warn"><i class="fa-solid fa-triangle-exclamation"></i>signalled estimate</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:74-82</span>function calcLocalGrants(havc, securedPct, isMinority) {
+  if (!isMinority || securedPct &lt; 0.75) return 0;
+  const min = 10000, max = 25000;
+  …
+}</div>
+        <div class="field-label">reasoning</div>
+        <div class="field-val rem">
+          No single national rulebook codifies "local grants" with these exact thresholds.
+          But practitioner experience: once a project has HAVC minority approval, city and
+          county culture funds (Zagreb, Istria, Split-Dalmatia, Rijeka, Pula, etc.)
+          routinely add their logo and a top-up — the <strong>domino effect</strong>. The
+          €10–25k band approximates a typical first/second local top-up; the 75% secured
+          gate proxies the moment when HAVC's nod has come through and a producer is
+          realistically able to package local funds.
+        </div>
+        <div class="field-label">ui signal</div>
+        <div class="field-val rem">
+          Memo row note now reads
+          <em>"Municipal / county top-up · typically follows once HAVC minority is greenlit."</em>
+          Constellation node: <em>"follows HAVC approval."</em>
+          The row is no longer presented as a national grant.
+        </div>
+      </div>
+    </article>
+
+    <!-- C13 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">13</div>
+        <h3 class="claim-title">Rebate · 70% of Croatian spend secured — operational reality</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:102-104</span>if (securedPct * totalBudget &lt; 0.7 * croatiaSpend) {
+  return { rebate: 0, extraRebate: 0, eligible: false, reason: 'secured-vs-spend' };
+}</div>
+        <div class="field-label">reasoning</div>
+        <div class="field-val rem">
+          The Pravilnik's Art 5(9) text
+          <em>„70 % sredstava predviđenih za pokrivanje troškova proizvodnje"</em>
+          is read strictly as 70% of total production cost — but HAVC has
+          <strong>neither the jurisdiction nor the enforcement tools</strong> to evaluate
+          non-Croatian portions of a foreign-led production's budget. Demanding it would
+          force a foreign producer to disclose worldwide expenses for a rebate that may
+          be a few percent of their overall budget — unenforceable, off-putting, and
+          contrary to the purpose of the scheme (incentivising spend <em>in</em> Croatia).
+          The operational reading, applied in practice, is 70% of the
+          <strong>Croatian</strong> spend.
+        </div>
+        <div class="field-label">fix</div>
+        <div class="field-val rem">
+          No behaviour change. The inline comment in <code>calcRebate</code> now explains
+          the jurisdictional reasoning so a future maintainer doesn't mistake this for an
+          oversight.
+        </div>
+      </div>
+    </article>
+
+    <!-- C14 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">14</div>
+        <h3 class="claim-title">Service productions cannot receive HAVC minority funds</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">code</div>
+        <div class="field-val code-block"><span class="filepath">calc.js:119-121</span>const havc = isMinority ? calcHAVC(...) : 0;</div>
+        <div class="field-label">law</div>
+        <div class="field-val quote">
+          NN 95/2023 Art 30–31 defines minority co-production by reference to the
+          Council of Europe Convention on Cinematographic Co-production; pure service
+          productions do not qualify as co-productions.
+        </div>
+        <div class="field-label">verdict</div>
+        <div class="field-val rem">
+          Correct. The calc still lets service productions claim the 25% rebate — also correct.
+        </div>
+      </div>
+    </article>
+
+    <!-- C15 -->
+    <article class="claim">
+      <div class="claim-head">
+        <div class="claim-num">15</div>
+        <h3 class="claim-title">Footer citation · fixed</h3>
+        <span class="v ok"><i class="fa-solid fa-check"></i>correct</span>
+      </div>
+      <div class="claim-body">
+        <div class="field-label">before</div>
+        <div class="field-val code-block"><span class="filepath">index.html:218 · pre-fix</span>Rates and thresholds reflect 2026 programme rules
+(HAVC Pravilnik - NN 95/2023 - NN 9/2024).</div>
+        <div class="field-label">problem</div>
+        <div class="field-val rem">
+          Treated NN 95/2023 and NN 9/2024 as one rulebook. They govern two separate
+          schemes — see <a href="#sources">Authoritative sources</a>.
+        </div>
+        <div class="field-label">after</div>
+        <div class="field-val quote">
+          Rebate scheme: NN 70/2019, NN 152/2022, NN 9/2024 (Pravilnik o poticanju
+          ulaganja u proizvodnju audiovizualnih djela). HAVC funding: NN 95/2023
+          (Pravilnik za provedbu Nacionalnog programa) under Zakon o audiovizualnim
+          djelatnostima (NN 61/2018, NN 114/2022, NN 123/2024).
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ─── WHAT WAS CHANGED ─── -->
+  <section>
+    <div class="section-head">
+      <h2>What was changed in this pass</h2>
+      <span class="kicker"><i class="fa-solid fa-screwdriver-wrench"></i>code &amp; ui</span>
+    </div>
+
+    <ol class="patch-list">
+      <li>
+        <p>
+          <span class="patch-where">calc.js · calcRebate</span>
+          Short films now short-circuit with <code>reason: 'short-ineligible'</code>
+          before any spend check (NN 9/2024 Art 5(7)(1)). The Short chip stays —
+          shorts are still HAVC-minority eligible.
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="patch-where">calc.js · calcHAVC</span>
+          Comment block rewritten: the 85% upper bound is now framed as math + market
+          practice (15% minority share + European-fund norms), not a Pravilnik rule.
+          The linear award formula is annotated as a transparent generalisation
+          calibrated against 2024–2025 minority award averages.
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="patch-where">calc.js · calcRebate</span>
+          The 70% Croatian-spend secured check carries a new comment explaining
+          the jurisdictional reasoning (HAVC has no enforcement over non-Croatian
+          budget components). No behaviour change.
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="patch-where">app.js · render()</span>
+          Memo ledger notes for HAVC, Local grants, and the Rebate row updated to
+          communicate <em>"indicative · discretionary"</em>,
+          <em>"follows HAVC approval"</em>, and the shorts-ineligible message.
+          Constellation node notes updated to match.
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="patch-where">index.html · footnote</span>
+          Citation rewritten to cite the rebate stack and the HAVC funding stack
+          as the separate rulebooks they are.
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ─── OPEN QUESTIONS ─── -->
+  <section>
+    <div class="section-head">
+      <h2>Future improvements</h2>
+      <span class="kicker"><i class="fa-solid fa-circle-question"></i>follow-ups</span>
+    </div>
+
+    <ul class="open-q">
+      <li>
+        <strong>Annual HAVC budget envelope.</strong> Once the 2026 Godišnji plan publishes
+        the minority budget, the <code>HAVC_RANGE</code> ceiling could be tightened
+        automatically.
+      </li>
+      <li>
+        <strong>Local-grant geography.</strong> A future version could surface which city /
+        county funds are typical first-domino candidates (Zagreb, Istria, Rijeka,
+        Split-Dalmatia, Pula).
+      </li>
+      <li>
+        <strong>Regional uplift list.</strong> The +5% applies only in JLS classified as
+        below-average development under Zakon o regionalnom razvoju (current list in NN's
+        Odluka o razvrstavanju jedinica lokalne i područne (regionalne) samouprave).
+        A follow-up could surface the actual JLS list instead of a boolean toggle.
+      </li>
+      <li>
+        <strong>Service-production cultural test.</strong> Service productions can claim the
+        rebate but face a cultural test (points-based). The calc doesn't model this; could
+        be added as a yes/no eligibility prompt.
+      </li>
+      <li>
+        <strong>Animation as a project type.</strong> The Pravilnik treats animation and
+        documentary identically for the €60k minimum spend. A dedicated animation chip
+        would be a small UX win.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ─── SIGNOFF ─── -->
+  <footer class="signoff">
+    <div>
+      Aning Film — always paranoid,<br>
+      never panicked.
+    </div>
+    <div class="right">
+      Truth report · 2026-05-19<br>
+      <a href="truth-report.md" style="color:var(--paper-dim);text-decoration:underline;text-decoration-color:var(--rule);">view markdown source</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

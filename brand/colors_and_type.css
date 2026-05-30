@@ -1,0 +1,257 @@
+/* Aning Film — Colors & Type
+ * Single source of truth for the brand's visual foundations.
+ * Dark theme is the default. Light theme is a courtesy.
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="colors_and_type.css">
+ *   <body class="theme-dark">  (or .theme-light, or .theme-auto)
+ */
+
+/* ─── WEB FONTS ───────────────────────────────────────────────
+ * Pinned via Google Fonts CDN.
+ * - Bricolage Grotesque · display / headlines (variable, opsz 12-96)
+ * - Albert Sans · body / UI
+ * - JetBrains Mono · monospace metadata, kickers, technical text
+ * - Sigmar · optional one-shot brand display (hand-drawn weight,
+ *   echoes the logo's vibe — use sparingly for big numerals, drop caps)
+ *
+ * SUBSTITUTION NOTE: The logo is hand-drawn custom lettering — there
+ * is no font file for it. Sigmar is the nearest CDN match for the
+ * thick, rounded, irregular character of the wordmark when text
+ * needs to LOOK like the logo (it almost never does — show the logo
+ * image instead).
+ */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Sigmar&display=swap');
+
+/* ─── COLOR TOKENS — DARK (default) ───────────────────────── */
+:root,
+:root.theme-dark,
+body.theme-dark {
+  /* Foundations — sampled from the logo */
+  --ink:        #2e2522;   /* primary background — warm near-black */
+  --ink-deep:   #20191698; /* deeper near-black, used with alpha */
+  --paper:      #f4ede2;   /* primary foreground — warm cream */
+  --paper-dim:  #d6cebe;   /* secondary text */
+  --muted:      #8a7e72;   /* tertiary / metadata */
+  --rule:       #4a3b35;   /* dividers, hairlines, faint borders */
+  --panel:      #382b27;   /* raised surfaces (cards, panels) */
+  --still-bg:   #2e2522;   /* image placeholder background */
+  --edge:       #3c2f2a;   /* quiet edges (constellation lines) */
+  --edge-on:    #6b554d;   /* lit edges */
+  --nebula-a:   #5a3a32;   /* warm cluster glow */
+  --nebula-b:   #3a2a25;   /* secondary cluster */
+
+  /* Accent — the Aning red */
+  --red:        #c14843;   /* sampled from the logo's A */
+  --red-deep:   #962f2b;
+
+  /* Thread palette — when multiple categories need distinct hues */
+  --thread-auteur:  #c14843;
+  --thread-cross:   #e8a04a;
+  --thread-inst:    #7fb38a;
+  --thread-feature: #7a9bc4;
+  --thread-tool:    #b88ad6;
+  --thread-extra:   #d97a91;
+
+  /* Semantic */
+  --bg:         var(--ink);
+  --fg:         var(--paper);
+  --fg-dim:     var(--paper-dim);
+  --accent:     var(--red);
+
+  color-scheme: dark;
+}
+
+/* ─── COLOR TOKENS — LIGHT (inverted) ─────────────────────── */
+body.theme-light {
+  --ink:        #f4ede2;
+  --ink-deep:   #e8dfd1;
+  --paper:      #2a201d;
+  --paper-dim:  #5a4a42;
+  --muted:      #8a7e72;
+  --rule:       #d6cebe;
+  --panel:      #efe5d4;
+  --still-bg:   #efe5d4;
+  --edge:       #c8bea8;
+  --edge-on:    #8a7a64;
+  --nebula-a:   #e8c9a8;
+  --nebula-b:   #d8b893;
+
+  --red:        #c14843;
+  --red-deep:   #962f2b;
+
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --fg-dim: var(--paper-dim);
+  --accent: var(--red);
+
+  color-scheme: light;
+}
+
+/* Follow OS pref in auto mode */
+@media (prefers-color-scheme: light) {
+  body.theme-auto {
+    --ink: #f4ede2; --ink-deep: #e8dfd1;
+    --paper: #2a201d; --paper-dim: #5a4a42;
+    --muted: #8a7e72; --rule: #d6cebe; --panel: #efe5d4;
+    --still-bg: #efe5d4; --edge: #c8bea8; --edge-on: #8a7a64;
+    --nebula-a: #e8c9a8; --nebula-b: #d8b893;
+    --bg: var(--ink); --fg: var(--paper); --fg-dim: var(--paper-dim);
+  }
+}
+
+/* ─── TYPOGRAPHY TOKENS ───────────────────────────────────── */
+:root {
+  /* Font families */
+  --font-display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "Albert Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-brand:   "Sigmar", "Bricolage Grotesque", system-ui, sans-serif;
+
+  /* Type scale — display (Bricolage, 800, tight tracking) */
+  --display-xxl: 92px;     /* hero one-shot — Dogma 23 wall */
+  --display-xl:  56px;     /* page H1 */
+  --display-lg:  38px;     /* project title, modal H */
+  --display-md:  30px;     /* ethos statements */
+  --display-sm:  22px;     /* card titles */
+
+  /* Body */
+  --body-xl: 24px;   /* studio statement, hero lede */
+  --body-lg: 18px;   /* section lede */
+  --body-md: 16px;   /* paragraph */
+  --body-sm: 14px;   /* compact paragraph, button text */
+  --body-xs: 12px;   /* fine print */
+
+  /* Mono — kickers, metadata, navigation utility */
+  --mono-sm:  11px;
+  --mono-xs:  10px;
+  --mono-xxs:  9px;
+
+  /* Line heights */
+  --lh-display: 0.92;
+  --lh-tight:   1.05;
+  --lh-snug:    1.25;
+  --lh-body:    1.4;
+  --lh-loose:   1.6;
+
+  /* Tracking */
+  --track-display: -0.025em;  /* tight on big display */
+  --track-body:     0em;
+  --track-mono:    0.04em;    /* spaced mono */
+  --track-kicker:  0.08em;    /* wide-spaced uppercase */
+}
+
+/* ─── BASE ELEMENTS ───────────────────────────────────────── */
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--body-sm);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+* { box-sizing: border-box; }
+::selection { background: var(--red); color: var(--paper); }
+
+/* Display — bricolage, heavy, tight. Always set on h1-h4. */
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-tight);
+  margin: 0;
+  text-wrap: balance;
+}
+h1, .display-xl { font-size: var(--display-xl); line-height: var(--lh-display); }
+h2, .display-lg { font-size: var(--display-lg); }
+h3, .display-md { font-size: var(--display-md); }
+h4, .display-sm { font-size: var(--display-sm); }
+.display-xxl    { font-size: var(--display-xxl); line-height: var(--lh-display); }
+
+/* Body */
+p, .body {
+  font-family: var(--font-body);
+  font-size: var(--body-md);
+  line-height: var(--lh-body);
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+.body-xl { font-size: var(--body-xl); line-height: var(--lh-body); }
+.body-lg { font-size: var(--body-lg); line-height: var(--lh-body); }
+.body-sm { font-size: var(--body-sm); }
+.body-xs { font-size: var(--body-xs); }
+
+/* Mono — the brand's "utility voice". Kickers, dates, technical notes. */
+.mono, code, kbd, samp {
+  font-family: var(--font-mono);
+  letter-spacing: var(--track-mono);
+}
+.mono-sm  { font-size: var(--mono-sm);  }
+.mono-xs  { font-size: var(--mono-xs);  }
+.mono-xxs { font-size: var(--mono-xxs); }
+
+/* Kicker — small, mono, uppercase, wide-spaced. The signature label. */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: var(--track-kicker);
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  display: inline-block;
+}
+.kicker--accent { color: var(--red); }
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rule);
+  transition: text-decoration-color 180ms ease;
+}
+a:hover { text-decoration-color: var(--red); }
+
+/* Buttons inherit our type */
+button, input, textarea, select { font-family: inherit; }
+
+/* ─── SCROLLBARS — narrow, brand-tinted ────────────────────── */
+* { scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--rule); border-radius: 6px;
+  border: 2px solid var(--ink);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--red); }
+
+/* ─── SPACING — modest scale, 4px base ─────────────────────── */
+:root {
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  22px;
+  --space-6:  28px;
+  --space-7:  36px;
+  --space-8:  48px;
+  --space-9:  64px;
+  --space-10: 96px;
+
+  /* Layout */
+  --gutter:       28px;
+  --content-w:   1100px;
+  --reading-w:    780px;
+  --narrow-w:     640px;
+
+  /* Borders & radii — radii are NEAR ZERO. Sharp corners are part of
+   * the brand. Buttons and chips are the only rounded elements. */
+  --r-0:    0px;     /* default — cards, panels, inputs, images */
+  --r-pill: 999px;   /* chips, theme toggle */
+
+  --hairline:  1px;
+  --rule-w:  1.5px;  /* default visible border weight */
+  --rule-w-strong: 3px;  /* accent border, brand bar */
+}
